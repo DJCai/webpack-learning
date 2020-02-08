@@ -14,7 +14,7 @@ const resolve = (dir) => {
 }
 
 // 多页面应用(MPA)打包
-const setMPA = (fileKey, htmlTemplate = 'index.html') => {
+const setMPA = (fileKey = 'index', htmlTemplate = 'index.html') => {
   const devMode = process.env.NODE_ENV !== 'production';
 
   const entry = {};

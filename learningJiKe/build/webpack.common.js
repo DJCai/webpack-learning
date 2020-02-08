@@ -1,7 +1,7 @@
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
-
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const utils = require('./utils.js')
 
 const devMode = process.env.NODE_ENV === 'development';
@@ -14,7 +14,7 @@ module.exports = {
         test: /\.m?(js|jsx)$/,
         include: [utils.resolve('src')],
         exclude: [utils.resolve('node_modules')], // 排除node_modules目录下的文件
-        use: ['babel-loader', 'eslint-loader'], // 服务端渲染时, 忽略eslint-loader
+        use: ['babel-loader', 'eslint-loader'],
       },
       {
         test: /\.json$/,
@@ -104,7 +104,8 @@ module.exports = {
         utils.resolve(['prod', process.env.SSR ? 'ssrdist' : 'dist']),
       ],
     }),
-    new LodashModuleReplacementPlugin(), // 按需打包 LOADSH
+    new LodashModuleReplacementPlugin(), // 按需打包LOADSH
+    new FriendlyErrorsWebpackPlugin(),
   ],
   resolve: {
     extensions: ['.js', '.json', '.ts', '.jsx'],

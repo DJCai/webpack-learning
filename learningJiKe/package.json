@@ -20,7 +20,7 @@
     "start:pwa": "http-server prod/dist",
     "dev": "node build/server/dev-server.js",
     "devmid": "node build/server/dev-middleware-server.js",
-    "build": "npm run lint & webpack --config build/webpack.prod.js",
+    "build": "webpack --config build/webpack.prod.js",
     "build:ssr": "webpack --config build/webpack.prodssr.js",
     "start:ssr": "npm run build:ssr & node ./build/ssrServer/index.js"
   },

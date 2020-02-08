@@ -2,9 +2,8 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
-
 const common = require('./webpack.common.js');
+
 let prodConfig = merge(common, {
   stats: 'errors-only', // 构建日志的输出形式
   plugins: [
@@ -19,7 +18,18 @@ let prodConfig = merge(common, {
       fileName: 'manifest/manifest.js',
     }),
     new webpack.HashedModuleIdsPlugin(),
-    new FriendlyErrorsWebpackPlugin() // 优化构建过程的日志内容
+    function errorPlugin() { // 构建过程异常和中断处理
+      this.hooks.done.tap('done', (stats) => { // this为构建对象compiler
+          if (
+            stats.compilation.errors
+            && stats.compilation.errors.length
+            && process.argv.indexOf('--watch') == -1)
+          {
+              console.log('build error');
+              process.exit(1);  //处理构建结果: 0 为成功, 非0为执行失败
+          }
+      })
+    }
   ],
 });
 

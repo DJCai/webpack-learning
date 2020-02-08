@@ -9,7 +9,7 @@ const HTMLInlineCSSWebpackPlugin = require('html-inline-css-webpack-plugin').def
 const utils = require('./utils.js')
 const common = require('./webpack.prodcommon.js');
 
-const { entry, htmlWebpackPlugins } = utils.setMPA('index');
+const { entry, htmlWebpackPlugins } = utils.setMPA();
 
 let prodConfig = merge({
   mode: 'production',

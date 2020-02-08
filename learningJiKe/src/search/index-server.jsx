@@ -3,6 +3,7 @@ const React = require('react');
 const largeNumber = require('learning-large-number');
 const feiji = require('../static/images/feiji.jpg').default;
 const s = require('../static/styles/style.less');
+
 class Search extends React.Component {
   constructor() {
     super(...arguments);

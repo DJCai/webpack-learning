@@ -1,11 +1,10 @@
 const merge = require('webpack-merge');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const utils = require('./utils.js')
 const common = require('./webpack.common.js');
 
-const { entry, htmlWebpackPlugins } = utils.setMPA('index');
+const { entry, htmlWebpackPlugins } = utils.setMPA();
 
 // 放在内存中
 module.exports = merge(common, {
@@ -28,6 +27,5 @@ module.exports = merge(common, {
       }),
       new webpack.HotModuleReplacementPlugin(),
       new webpack.NamedModulesPlugin(), // 在热加载时直接返回更新文件名
-      new FriendlyErrorsWebpackPlugin()
     ]),
 });
