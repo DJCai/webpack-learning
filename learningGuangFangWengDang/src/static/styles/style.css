@@ -1,0 +1,10 @@
+/* @font-face {
+    font-family: 'MyFont';
+    src: url('../fonts/zihun146.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+} */
+
+.hello {
+    color: blue;
+}
