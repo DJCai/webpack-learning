@@ -1,0 +1,19 @@
+{
+    "presets": [
+        [
+            "@babel/preset-env", // 使用该规则进行文件处理
+            {
+                "targets": {
+                    "node": "current",
+                    "browsers": [ "ie >= 8", "chrome >= 62" ]
+                }
+            }
+        ],
+        "@babel/preset-react" // 使用该规则进行文件处理
+    ],
+    "plugins": [
+        // "@babel/plugin-transform-runtime", // ssr时, 不执行
+        "@babel/plugin-syntax-dynamic-import",
+        "lodash"
+    ]
+}
