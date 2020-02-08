@@ -21,12 +21,11 @@ const setMPA = (fileKey = 'index', htmlTemplate = 'index.html') => {
   const htmlWebpackPlugins = [];
   const entryJsFiles = glob.sync(resolve(`src/*/${fileKey}.js`)) || []
   const entryJsxFiles = glob.sync(resolve(`src/*/${fileKey}.jsx`)) || []
+
   const entryFiles = [].concat(entryJsFiles).concat(entryJsxFiles)
 
-  Object.keys(entryFiles).length
-    && Object.keys(entryFiles)
-    .forEach(index => {
-      const entryFile = entryFiles[index];
+  entryFiles.length
+    && entryFiles.forEach(entryFile => {
       const regexp = new RegExp('src\/(.*)\/' + fileKey + '\.(js|jsx)');
       const match = entryFile.match(regexp);
       const pageName = match && match[1];

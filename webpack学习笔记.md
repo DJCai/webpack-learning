@@ -809,7 +809,7 @@
     ]
 ```
 
-### 4 tree-shaking
+4. tree-shaking
 4.0 原理
     1) 没用的代码(dce): 
         a) 代码不会被执行, 不可执行
@@ -827,7 +827,7 @@
 4.2 要求
     必须使用es6, 不能使用cjs
 
-### 5. 集合ESLint
+5. 集合ESLint
 5.1 规范
     1) 基于eslint:recommend配置及改进
     2) 全部开启有助于帮助发现错误的规则
@@ -888,7 +888,7 @@
         "lint": "eslint src --fix" // 指定文件夹
     }
 ```
-### 6. SSR服务端渲染
+6. SSR服务端渲染
 6.1 优点
     减少请求
     减少白屏时间
@@ -900,7 +900,7 @@
     2) 服务端
     打包出针对服务端的组件
 
-### 7. 优化构建时命令行的显示日志
+7. 优化构建时命令行的显示日志
 7.1 问题
     构建过程默认展示构建过程的日志, 可对于开发人员,只想关注发生错误或与警告的日志, 
 7.2 统计信息stats
@@ -939,4 +939,26 @@
         ]
     }
 ```
-### 8.构建异常和中断处理
+8. 构建异常和中断处理
+8.1 需求
+    构建结束后若后续有其他处理, 构建失败后需主动中断
+8.2 使用
+```js
+    module.exports = {
+        ...
+        plugins: [
+            function errorPlugin() { // 构建过程异常和中断处理
+                this.hooks.done.tap('done', (stats) => { // this为构建对象compiler
+                    if (
+                        stats.compilation.errors
+                            && stats.compilation.errors.length
+                            && process.argv.indexOf('--watch') === -1) {
+                        console.log('build error')
+                        process.exit(1); // 处理构建结果: 0 为成功, 非0为执行失败
+                    }
+                });
+            },
+        ]
+        ...
+    }
+```
